@@ -1,7 +1,10 @@
 //! This example demonstrates the ability to compose together multiple
 //! structs deriving `Accounts`. See `CompositeUpdate`, below.
 
+mod foo;
+
 use anchor_lang::prelude::*;
+use foo::{DummyA, Foo};
 
 declare_id!("EHthziFziNoac9LBGxEaVN47Y3uUiRoXvqAiR6oes4iU");
 
@@ -42,20 +45,9 @@ pub struct CompositeUpdate<'info> {
 }
 
 #[derive(Accounts)]
-pub struct Foo<'info> {
-    #[account(mut)]
-    pub dummy_a: Account<'info, DummyA>,
-}
-
-#[derive(Accounts)]
 pub struct Bar<'info> {
     #[account(mut)]
     pub dummy_b: Account<'info, DummyB>,
-}
-
-#[account]
-pub struct DummyA {
-    pub data: u64,
 }
 
 #[account]
